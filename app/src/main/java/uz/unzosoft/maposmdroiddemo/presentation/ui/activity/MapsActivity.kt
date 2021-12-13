@@ -1,7 +1,8 @@
-package uz.unzosoft.maposmdroiddemo
+package uz.unzosoft.maposmdroiddemo.presentation.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -9,24 +10,19 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import uz.unzosoft.maposmdroiddemo.R
 import uz.unzosoft.maposmdroiddemo.databinding.ActivityMapsBinding
+import uz.unzosoft.maposmdroiddemo.presentation.ui.base.BaseActivity
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-    private lateinit var binding: ActivityMapsBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        binding = ActivityMapsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+//        val mapFragment = supportFragmentManager
+//            .findFragmentById(R.id.map) as SupportMapFragment
+//        mapFragment.getMapAsync(this)
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
-    }
 
     /**
      * Manipulates the map once available.
@@ -45,4 +41,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
+
+    override fun bindingActivity(): ActivityMapsBinding {
+        return ActivityMapsBinding.inflate(layoutInflater)
+    }
+
+    override fun onCreated(savedInstanceState: Bundle?) {
+
+    }
+
+
 }
