@@ -1,25 +1,24 @@
-package uz.unzosoft.maposmdroiddemo.presentation.ui.activity
+package uz.unzosoft.maposmdroiddemo.presentation.ui.activity.maps
 
+import android.R
+import android.annotation.SuppressLint
 import android.os.Bundle
+import androidx.activity.viewModels
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.overlay.ItemizedIconOverlay
+import org.osmdroid.views.overlay.ItemizedIconOverlay.OnItemGestureListener
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.OverlayItem
 import org.osmdroid.views.overlay.compass.CompassOverlay
 import uz.unzosoft.maposmdroiddemo.databinding.ActivityMapsBinding
 import uz.unzosoft.maposmdroiddemo.presentation.ui.base.BaseActivity
-import org.osmdroid.views.overlay.Overlay
-import org.osmdroid.views.overlay.OverlayItem
-import org.osmdroid.views.overlay.ItemizedIconOverlay
-
-import android.R
-
-import android.graphics.drawable.Drawable
-import org.osmdroid.views.overlay.ItemizedIconOverlay.OnItemGestureListener
 
 
 class MapsActivity : BaseActivity<ActivityMapsBinding>() {
 
+    private val viewModel: MapActivityVM by viewModels()
     private lateinit var map: org.osmdroid.views.MapView
     var currentLocationOverlay: ItemizedIconOverlay<OverlayItem>? = null
 
@@ -28,6 +27,7 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>() {
         return ActivityMapsBinding.inflate(layoutInflater)
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreated(savedInstanceState: Bundle?) {
         map = binding.map
         Configuration.getInstance().load(this, getSharedPreferences("couirer", MODE_PRIVATE))
@@ -35,14 +35,14 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>() {
         map.setTileSource(TileSourceFactory.MAPNIK)
         map.setBuiltInZoomControls(true)
         map.setMultiTouchControls(true)
-        mapController.setZoom(19.4 )
-        val compassOverlay = CompassOverlay(this,map)
+        mapController.setZoom(19.4)
+        val compassOverlay = CompassOverlay(this, map)
         compassOverlay.enableCompass()
         map.overlays.add(compassOverlay)
         val geoPoint = GeoPoint(41.341010692133864, 69.28675052447048)
         val marker = Marker(map)
         marker.position = geoPoint
-        marker.setAnchor(Marker.ANCHOR_CENTER,Marker.ANCHOR_CENTER)
+        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
         map.overlays.add(marker)
 
 
@@ -62,12 +62,13 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>() {
         myLocationOverlayItem.setMarker(myCurrentLocationMarker)
 
 
+
         items.add(myLocationOverlayItem)
 
 
 
         currentLocationOverlay = ItemizedIconOverlay<OverlayItem>(
-            items,object:OnItemGestureListener<OverlayItem>{
+            items, object : OnItemGestureListener<OverlayItem> {
                 override fun onItemSingleTapUp(index: Int, item: OverlayItem?): Boolean {
                     return true
                 }
@@ -76,7 +77,7 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>() {
                     return true
                 }
 
-            },this
+            }, this
         )
         map.overlays.add(this.currentLocationOverlay)
 

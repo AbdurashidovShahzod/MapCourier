@@ -6,15 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-
-
 /**
  * Created by Abdurashidov Shahzod on 14/09/21 14:21.
  * company QQBank
  * shahzod9933@gmail.com
  */
-
-
 abstract class BaseScreen<T : ViewBinding>() : Fragment() {
 
     protected val TAG: String = "TAG"

@@ -1,4 +1,4 @@
-package uz.unzosoft.maposmdroiddemo.presentation.ui.activity
+package uz.unzosoft.maposmdroiddemo.presentation.ui.activity.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

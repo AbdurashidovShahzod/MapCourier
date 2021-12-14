@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -46,6 +48,39 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
 
-    // Osmdroid map dependency
+    /**
+     * Osmdroid map dependency
+     */
+
     implementation 'org.osmdroid:osmdroid-android:6.1.11'
+
+    /**
+     * Coroutine ktx
+     */
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$coroutines_ktx"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$coroutines_ktx"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$coroutines_ktx"
+
+
+    /**
+     * ViewModelProviders
+     * */
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+
+    /**
+     *  For using create viewModel object on Fragment
+     * */
+
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+
+    // Coroutine
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+
+    // hilt
+    implementation "com.google.dagger:hilt-android:2.38.1"
+    kapt "com.google.dagger:hilt-compiler:2.38.1"
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
 }

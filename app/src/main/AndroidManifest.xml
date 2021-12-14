@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MapOsmdroidDemo">
         <activity
-            android:name=".presentation.ui.activity.MainActivity"
+            android:name=".presentation.ui.activity.main.MainActivity"
             android:exported="false" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -37,7 +37,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".presentation.ui.activity.MapsActivity"
+            android:name=".presentation.ui.activity.maps.MapsActivity"
             android:exported="true"
             android:label="@string/title_activity_maps">
             <intent-filter>
