@@ -11,6 +11,7 @@ import org.osmdroid.views.overlay.ItemizedIconOverlay
 import org.osmdroid.views.overlay.ItemizedIconOverlay.OnItemGestureListener
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.OverlayItem
+import org.osmdroid.views.overlay.Polyline
 import org.osmdroid.views.overlay.compass.CompassOverlay
 import uz.unzosoft.maposmdroiddemo.databinding.ActivityMapsBinding
 import uz.unzosoft.maposmdroiddemo.presentation.ui.base.BaseActivity
@@ -46,18 +47,27 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>() {
         map.overlays.add(marker)
 
 
-        val currentLocation = GeoPoint(41.341010692133864, 69.28675052447048)
-        val currentLocation2 = GeoPoint(41.342785252244624, 69.28698977855444)
-        var myLocationOverlayItem = OverlayItem("Shahzod", "Current Position", currentLocation)
+        val startPoint = GeoPoint(41.341010692133864, 69.28675052447048)
+        val endPoint = GeoPoint(41.342785252244624, 69.28698977855444)
+        var myLocationOverlayItem = OverlayItem("Shahzod", "Current Position", startPoint)
         var myCurrentLocationMarker = this.resources.getDrawable(R.drawable.sym_action_call)
         myLocationOverlayItem.setMarker(myCurrentLocationMarker)
 
+
         val items = ArrayList<OverlayItem>()
+        val geoPoints = ArrayList<GeoPoint>()
+        geoPoints.add(startPoint)
+        geoPoints.add(endPoint)
+        val polyline = Polyline()
+        map.overlays.add(polyline)
+
         items.add(myLocationOverlayItem)
+        map.invalidate()
 
 
 
-        myLocationOverlayItem = OverlayItem("Shohruh", "Current Position", currentLocation2)
+
+        myLocationOverlayItem = OverlayItem("Shohruh", "Current Position", endPoint)
         myCurrentLocationMarker = resources.getDrawable(R.drawable.sym_action_call)
         myLocationOverlayItem.setMarker(myCurrentLocationMarker)
 
